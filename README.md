@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Chatbot
+
+A modern AI assistant built with Next.js app router, AI SDK integration, Tailwind CSS, Framer Motion, and MongoDB persistence.
+
+## Key Features
+
+- Chat interface with AI-powered assistant
+- Auto-resizing message input textarea
+- Sidebar for chat session navigation
+- Streaming response support and skeleton loading state
+- Dark mode ready UI with animated transitions
+- MongoDB-backed chat persistence via server actions
+
+## Project Structure
+
+- `app/page.tsx` — main chat screen and client-side chat logic
+- `app/actions.ts` — server actions for loading, saving, and deleting chats
+- `app/api/chat/route.ts` — chat API route
+- `components/SideBar/page.tsx` — sidebar UI and session controls
+- `components/NavBar/page.tsx` — top navigation bar
+- `components/ChatBubble/page.tsx` — chat message rendering
+- `components/ChatSkeleton/page.tsx` — loading placeholder while AI streams responses
+- `lib/mongodb.ts` — MongoDB connection helper
+- `models/chat.ts` — chat schema and model definition
 
 ## Getting Started
 
-First, run the development server:
+### Requirements
+
+- Node.js 20+
+- npm, Yarn, or pnpm
+- MongoDB connection string
+
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Run locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000` in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env` file at the project root with your MongoDB connection string and any AI provider keys required by `@ai-sdk`.
 
-## Learn More
+Example:
 
-To learn more about Next.js, take a look at the following resources:
+```env
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/mydatabase
+NEXT_PUBLIC_APP_ENV=development
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> If you are using an AI provider like OpenAI or Google, add the appropriate provider keys according to `@ai-sdk` documentation.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Commands
 
-## Deploy on Vercel
+- `npm run dev` — start development server
+- `npm run build` — build production app
+- `npm run start` — start production server
+- `npm run lint` — run ESLint
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Notes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- The app relies on `@ai-sdk/react` for chat state and streaming responses.
+- Chat sessions are saved in MongoDB using `Chat.findOneAndUpdate` in `app/actions.ts`.
+- `app/page.tsx` uses `AnimatePresence` and `motion` from Framer Motion for smooth UI transitions.
+
+## Deployment
+
+Deploy this app on Vercel or any platform that supports Next.js.
+
+1. Configure environment variables on your hosting provider.
+2. Build and deploy.
+
+## License
+
+MIT
