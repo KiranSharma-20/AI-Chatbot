@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import dbConnect from "@/lib/mongodb";
 import Chat from "@/models/chat";
-import ChatBubble from "@/components/ChatBubble/page";
+import ChatBubble from "@/components/ChatBubble/ChatBubble";
 import Home from "@/app/page";
 export default async function ChatPage({ params }: { params: { id: string } }) {
   await dbConnect();

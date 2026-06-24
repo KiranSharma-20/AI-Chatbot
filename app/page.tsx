@@ -1,12 +1,12 @@
 "use client";
 import { useChat } from "@ai-sdk/react";
 import { useState, useEffect, useRef } from "react";
-import SideBar from "@/components/SideBar/page";
-import NavBar from "@/components/NavBar/page";
+import SideBar from "@/components/SideBar/SideBar";
+import NavBar from "@/components/NavBar/NavBar";
 import { SendHorizontal, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import ChatSkeleton from "@/components/ChatSkeleton/page";
-import ChatBubble from "@/components/ChatBubble/page";
+import ChatSkeleton from "@/components/ChatSkeleton/ChatSkeleton";
+import ChatBubble from "@/components/ChatBubble/ChatBubble";
 
 export default function Home({
   id,
