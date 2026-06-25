@@ -10,7 +10,7 @@ export async function getChatList() {
 
     const rawChats = await Chat.find({}, "chatId title").sort({ updatedAt: -1 }).lean();
     const cleanChats = JSON.parse(JSON.stringify(rawChats));
-    return Response.json(cleanChats || []);
+    return cleanChats || [];
   } catch {
     console.error("Error fetching chat list");
     return [];
