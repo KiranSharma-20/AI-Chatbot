@@ -7,9 +7,10 @@ import { redirect } from "next/navigation";
 export async function getChatList() {
   try {
     await dbConnect();
+
     const rawChats = await Chat.find({}, "chatId title").sort({ updatedAt: -1 }).lean();
     const cleanChats = JSON.parse(JSON.stringify(rawChats));
-    return cleanChats;
+    return Response.json(cleanChats || []);
   } catch {
     console.error("Error fetching chat list");
     return [];
