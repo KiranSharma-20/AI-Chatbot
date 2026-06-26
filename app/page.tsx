@@ -32,8 +32,10 @@ export default function Home({
     }
   }, [messages]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = (e?: any) => {
+    if (e && typeof e.preventDefault === "function") {
+      e?.preventDefault();
+    }
     sendMessage({ text: input });
     setInput(" ");
   };
@@ -132,13 +134,13 @@ export default function Home({
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") {
+                  if (e.key === "Enter" && !e.shiftKey) {
                     e.preventDefault();
-                    handleSubmit(e);
+                    handleSubmit({} as React.FormEvent<HTMLFormElement>);
                   }
                 }}
                 placeholder="Message AI Studio..."
-                className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl py-4 pr-14 px-6 focus:outline-none focus:ring-1 focus:ring-blue-500/40 dark:focus:bg-[#11827] transition-all dark:text-slate-200 resize-none max-h-48"
+                className="w-full bg-white dark:bg-white/5 overflow-hidden border border-slate-200 dark:border-white/10 rounded-2xl py-4 pr-14 px-6 focus:outline-none focus:ring-1 focus:ring-blue-500/40 dark:focus:bg-[#11827] transition-all dark:text-slate-200 resize-none max-h-48"
               />
               <button
                 type="submit"
