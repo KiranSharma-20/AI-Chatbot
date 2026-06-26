@@ -131,11 +131,12 @@ export default function Home({
                 rows={1}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) =>
-                  e.key === "Enter" &&
-                  !e.shiftKey &&
-                  (e.preventDefault(), handleSubmit)
-                }
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    handleSubmit(e);
+                  }
+                }}
                 placeholder="Message AI Studio..."
                 className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl py-4 pr-14 px-6 focus:outline-none focus:ring-1 focus:ring-blue-500/40 dark:focus:bg-[#11827] transition-all dark:text-slate-200 resize-none max-h-48"
               />
