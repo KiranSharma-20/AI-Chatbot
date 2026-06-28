@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 export async function getChatList() {
   try {
     await dbConnect();
-
+    console.log("fetching list");
     const rawChats = await Chat.find({}, "chatId title").sort({ updatedAt: -1 }).lean();
     const cleanChats = JSON.parse(JSON.stringify(rawChats));
     return cleanChats || [];
@@ -31,7 +31,7 @@ export async function saveChat(chatId: string, messages: any) {
   try {
     await Chat.findOneAndUpdate(
       { chatId: safeChatId },
-      { chatId: safeChatId, title, messages },
+      { chatId: safeChatId, title, messages, updateAt: new Date() },
       { upsert: true, returnDocument: "after" }
     );
     console.log("Chat saved to database");
