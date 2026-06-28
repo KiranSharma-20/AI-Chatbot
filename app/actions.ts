@@ -8,6 +8,7 @@ export async function getChatList() {
   try {
 
     await dbConnect();
+    console.log("coming from database")
 
     const rawChats = await Chat.find({}, "chatId title").sort({ updatedAt: -1 }).lean();
     const cleanChats = JSON.parse(JSON.stringify(rawChats));
