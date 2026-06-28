@@ -6,8 +6,9 @@ import { redirect } from "next/navigation";
 
 export async function getChatList() {
   try {
-    await dbConnect();
     console.log("fetching list");
+    await dbConnect();
+
     const rawChats = await Chat.find({}, "chatId title").sort({ updatedAt: -1 }).lean();
     const cleanChats = JSON.parse(JSON.stringify(rawChats));
     return cleanChats || [];
