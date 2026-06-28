@@ -6,14 +6,14 @@ import { redirect } from "next/navigation";
 
 export async function getChatList() {
   try {
-    console.log("fetching list");
+
     await dbConnect();
 
     const rawChats = await Chat.find({}, "chatId title").sort({ updatedAt: -1 }).lean();
     const cleanChats = JSON.parse(JSON.stringify(rawChats));
     return cleanChats || [];
   } catch {
-    console.error("Error fetching chat list");
+    console.error("Error fetching chat lists");
     return [];
   }
 
